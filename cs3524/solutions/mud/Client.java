@@ -36,8 +36,8 @@ public class Client {
 			MUDServerInterface server = (ShoutServerInterface)Naming.lookup(regURL);
 			System.out.println("Connection is up and running"); // Now we can access methods on the MUDServer through its interface, e.g. server.method()
 
-			// Here is where we need to call a method that starts the game...
-			
+			startGame(); // Starts the game
+
 			}
 
 		catch (java.io.IOException e) {
@@ -51,4 +51,11 @@ public class Client {
 		}
 		
 	}
+
+	static void startGame() throws Exception {
+		server.serverList();
+		System.out.println("Choose a MUD server from the list by typing its name.");
+		name = in.readline();
+	}
+
 }
