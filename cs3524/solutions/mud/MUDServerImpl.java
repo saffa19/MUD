@@ -6,8 +6,7 @@
 
 package cs3524.solutions.mud;
 
-import java.rmi.RemoteException;
-
+import java.rmi.*;
 import cs3524.solutions.mud.MUD;
 import cs3524.solutions.mud.MUDServerInterface; // necessary??
 
@@ -17,13 +16,13 @@ import cs3524.solutions.mud.MUDServerInterface; // necessary??
 public class MUDServerImpl implements MUDServerInterface {
 
 	public MUD _MUD;	// an instance variable to reference a MUD
-	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs
+	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
 
 	public MUDServerImpl() throws RemoteException {
 	
 	}
 
-	createMUD(String name) throws RemoteException {
+	public void createMUD(String name) throws RemoteException {
 		try{
 			servers.put(name, new MUD("mymud.edg","mymud.msg","mymud.thg"));
 			System.out.println("Created a MUD called " + name);
@@ -33,10 +32,39 @@ public class MUDServerImpl implements MUDServerInterface {
 		}
 	}
 
-
-	void serverList() throws RemoteException {
+	public void serverList() throws RemoteException {
 		System.out.println("-------------------------------\nServers: ");
 		System.out.println(servers); // don't know if this will work or if I'll need to print for each entry...
 	}
 
+	public String moveThing(String location, String dirrection, String thing) throws RemoteException {
+		return _MUD.moveThing(loc, dir, thing);
+	}
+
+	public void delThing(String loc, String thing) throws RemoteException {
+		_MUD.delThing(loc, thing);
+		System.out.println("Deleted " + thing + " from " + loc);
+	};
+
+	public void addThing(String loc, String thing) throws RemoteException {
+		return _MUD.addThing(loc, thing);
+		System.out.println("Added " + thing + " from " + loc);
+	};
+
+	public String locationInfo(String loc) throws RemoteException {
+		return _MUD.locationInfo(loc);
+	};
+
+	public String startLocation() throws RemoteException {
+		return _MUD.startLocation();
+	};
+
+	public void connectUser() throws RemoteException {
+		// connect the user securely to the MUD instance.
+		// probably keep a synchronised record of who's online. --> maybe an onlineUsers() method?
+	}
+
+	public void disconnectUser() throws RemoteException {
+		// disconnect the user securely to the MUD instance.
+	}
 }

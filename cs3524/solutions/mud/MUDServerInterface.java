@@ -14,4 +14,5 @@ public interface MUDServerInterface extends Remote
 {
     public void createMUD(String name) throws RemoteException;
     public void serverList() throws RemoteException;
+    public String moveThing(loc,dir,thing) throws RemoteException;
 }
