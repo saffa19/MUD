@@ -13,5 +13,5 @@ Will try to do the whole thing tomorrow before granite city waterpolo match at 2
 
 ## 20 March 2019
 Can confirm that this won't be finished by 2pm.
-- Error 1: methods defined in MUDServerInterface are missing their identifiers.
+- Error 1: moveThing() defined in MUDServerInterface is missing identifiers -> leads to 'cannot find symbol' error in MUDServerImpl
 - Error 2: haven't imported Map to created the hashmap of servers.
