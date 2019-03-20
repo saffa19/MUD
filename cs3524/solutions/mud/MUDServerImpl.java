@@ -23,12 +23,12 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 	public String start() throws RemoteException {
-		return "To create a new MUD server, enter a server name (can't be nothing).";
+		return "\nTo create a new MUD server, enter a server name (can't be nothing).";
 	}
 
 	public void createMUD(String name) throws RemoteException {
 		try{
-			new MUD("mymud.edg","mymud.msg","mymud.thg");
+			_MUD = new MUD("mymud.edg","mymud.msg","mymud.thg");
 			System.out.println("Created a MUD called " + name);
 		}
 		catch (Exception e) {
@@ -42,6 +42,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	//}
 
 	public String moveThing(String loc, String dir, String thing) throws RemoteException {
+		System.out.println("Moved " + thing + " from " + loc + " (" + dir + ")");
 		return _MUD.moveThing(loc, dir, thing);
 	}
 

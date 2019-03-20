@@ -70,8 +70,23 @@ public class Client {
 
 
 	static void playGame(String name) throws Exception {
-		System.out.println("You are playing on: " + name);
-		//System.out.println(server.toString());
+		boolean inPlay = true;
+		int move = 0;
+		System.out.println("\nYou are playing on: " + name + "\nWho's playing?");
+		String username = in.readLine();
+		String location = server.startLocation();
+		server.addThing(location, username);
+		System.out.println("---------------------------------- You are now in play! ----------------------------------");
+		System.out.println(username + " is at location " + location);
+		while (inPlay){
+			move += 1;
+			System.out.println("Move #" + move);
+			String userInput = in.readLine();
+			if (userInput == "north"){
+				location = server.moveThing(location,userInput,username);
+			}
+		}
+		
 	}
 
 
