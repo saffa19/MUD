@@ -5,3 +5,13 @@
 */
 
 package cs3524.solutions.mud;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+// Interface provides access to methods in MUDServerImpl.java
+public interface MUDServerInterface extends Remote
+{
+    public void createMUD(String name) throws RemoteException;
+    public void serverList() throws RemoteException;
+}
