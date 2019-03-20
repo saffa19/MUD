@@ -22,6 +22,10 @@ public class MUDServerImpl implements MUDServerInterface {
 	
 	}
 
+	public String start() throws RemoteException {
+		return "To create a new MUD server, enter a server name (can't be nothing).";
+	}
+
 	public void createMUD(String name) throws RemoteException {
 		try{
 			new MUD("mymud.edg","mymud.msg","mymud.thg");
