@@ -56,9 +56,25 @@ public class Client {
 
 	static void startGame() throws Exception {
 		// server.serverList();	// prints a list of the available MUDs to choose from
-		System.out.println( "Enter a name for the MUD" );
+		System.out.println(server.start());
 		String name = in.readLine();
-		server.createMUD(name);
+
+		if (name == null) {
+			System.out.println("Please enter a valid name (can't be null)!");
+			startGame();
+		} else {
+			server.createMUD(name);
+			playGame(name);
+		}
 	}
+
+
+	static void playGame(String name) throws Exception {
+		System.out.println("You are playing on: " + name);
+		//System.out.println(server.toString());
+	}
+
+
+
 
 }
