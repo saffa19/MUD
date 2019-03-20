@@ -71,19 +71,60 @@ public class Client {
 
 	static void playGame(String name) throws Exception {
 		boolean inPlay = true;
-		int move = 0;
-		System.out.println("\nYou are playing on: " + name + "\nWho's playing?");
+		int move = 1;
+		System.out.println("\nYou are playing on server: " + name + "\nWho's playing?");
 		String username = in.readLine();
-		String location = server.startLocation();
-		server.addThing(location, username);
-		System.out.println("---------------------------------- You are now in play! ----------------------------------");
-		System.out.println(username + " is at location " + location);
+		String spawn = server.startLocation();
+		String myLocation = "";
+		String info = "";
+
+		server.addThing(spawn, username);
+		System.out.println("\n---------------------------------- You are now in play! ----------------------------------");
+		System.out.println("You are at location " + spawn);
+		System.out.println("Move #1");
+
 		while (inPlay){
-			move += 1;
-			System.out.println("Move #" + move);
 			String userInput = in.readLine();
-			if (userInput == "north"){
-				location = server.moveThing(location,userInput,username);
+			switch(userInput) {
+				case "help" :
+					System.out.println("Commands:");
+					System.out.println("1. Moving: north, south, east, west");
+					System.out.println("2. Location information: info");
+					break;
+
+				case "north" :
+				case "south" :
+				case "east" :
+				case "west" :
+					if (move == 1){
+						myLocation = server.moveThing(spawn, userInput, username);
+					} else {
+						myLocation = server.moveThing(myLocation, userInput, username);
+					}
+					System.out.println("You move to location " + myLocation);
+					move += 1;
+					System.out.println("\nMove #" + move);
+					break;
+				
+				case "info" :
+					if (move == 1){
+						info = server.locationInfo(spawn);
+					} else {
+						info = server.locationInfo(myLocation);
+					}
+					System.out.println(info);
+					break;
+
+				case "take" :
+					// return a list of the items in the current location
+					// ask player which item they want
+					// add the item to the player's inventory
+					// delete the item from the current location
+					break;
+
+				default :
+					System.out.println("Not a valid command! (type 'help' for a list of commands)");
+					break;
 			}
 		}
 		

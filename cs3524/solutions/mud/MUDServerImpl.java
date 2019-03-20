@@ -42,7 +42,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	//}
 
 	public String moveThing(String loc, String dir, String thing) throws RemoteException {
-		System.out.println("Moved " + thing + " from " + loc + " (" + dir + ")");
+		System.out.println("Moved " + thing + " from " + loc + ", " + dir + "wards");
 		return _MUD.moveThing(loc, dir, thing);
 	}
 
@@ -53,7 +53,7 @@ public class MUDServerImpl implements MUDServerInterface {
 
 	public void addThing(String loc, String thing) throws RemoteException {
 		_MUD.addThing(loc, thing);
-		System.out.println("Added " + thing + " from " + loc);
+		System.out.println("Added " + thing + " to " + loc);
 	};
 
 	public String locationInfo(String loc) throws RemoteException {
