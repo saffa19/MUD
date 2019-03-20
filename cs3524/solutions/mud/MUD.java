@@ -94,7 +94,7 @@ public class MUD
 
     /**
      * Creates the edges of the graph on the basis of a file with the
-     * following fromat:
+     * following format:
      * source direction destination message
      */
     private void createEdges( String edgesfile )

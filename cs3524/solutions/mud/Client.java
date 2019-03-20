@@ -14,6 +14,9 @@ import java.rmi.RemoteException;
 
 public class Client {
 
+	static MUDServerInterface server;	// a variable in the Client class scope, so that we can reference the same server across methods declared here
+	static BufferedReader in = new BufferedReader(new InputStreamReader( System.in )); // from rmishout: gets input from console.
+
 	public static void main(String[] args) throws Exception {
 		if (args.length < 2) {
 			System.err.println("Please enter your <host> and <port>");
@@ -24,7 +27,7 @@ public class Client {
 		int port = Integer.parseInt(args[1]);
 
 		// Specify the security policy and set the security manager.
-		System.setProperty("java.security.policy", "rmishout.policy");
+		System.setProperty("java.security.policy", "mud.policy");
 		System.setSecurityManager(new SecurityManager());
 
 		try {
@@ -32,10 +35,10 @@ public class Client {
 			// listening at hostname:port.
 			String regURL = "rmi://" + hostname + ":" + port + "/MUDServer";
 			System.out.println("Looking up " + regURL);
-			MUDServerInterface server = (MUDServerInterface)Naming.lookup(regURL);
+			server = (MUDServerInterface)Naming.lookup(regURL);
 			System.out.println("Connection is up and running"); // Now we can access methods on the MUDServer through its interface, e.g. server.method()
 
-			startGame(server); // Starts the game
+			startGame(); // Starts the game
 
 			}
 
@@ -51,11 +54,11 @@ public class Client {
 		
 	}
 
-	static void startGame(MUDServerInterface server) throws Exception {
+	static void startGame() throws Exception {
 		// server.serverList();	// prints a list of the available MUDs to choose from
-		BufferedReader in = new BufferedReader(
-			new InputStreamReader( System.in ));
-			System.out.println( "enter a name for the MUD" );
+		System.out.println( "Enter a name for the MUD" );
+		String name = in.readLine();
+		server.createMUD(name);
 	}
 
 }
