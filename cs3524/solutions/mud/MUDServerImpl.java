@@ -6,6 +6,7 @@
 
 package cs3524.solutions.mud;
 
+import java.util.*;
 import java.rmi.*;
 import cs3524.solutions.mud.MUD;
 import cs3524.solutions.mud.MUDServerInterface; // necessary??
@@ -37,7 +38,7 @@ public class MUDServerImpl implements MUDServerInterface {
 		System.out.println(servers); // don't know if this will work or if I'll need to print for each entry...
 	}
 
-	public String moveThing(String location, String dirrection, String thing) throws RemoteException {
+	public String moveThing(String loc, String dir, String thing) throws RemoteException {
 		return _MUD.moveThing(loc, dir, thing);
 	}
 
@@ -47,7 +48,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	};
 
 	public void addThing(String loc, String thing) throws RemoteException {
-		return _MUD.addThing(loc, thing);
+		_MUD.addThing(loc, thing);
 		System.out.println("Added " + thing + " from " + loc);
 	};
 

@@ -6,8 +6,7 @@
 
 package cs3524.solutions.mud;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 import java.rmi.Naming;
 import java.lang.SecurityManager;
@@ -33,10 +32,10 @@ public class Client {
 			// listening at hostname:port.
 			String regURL = "rmi://" + hostname + ":" + port + "/MUDServer";
 			System.out.println("Looking up " + regURL);
-			MUDServerInterface server = (ShoutServerInterface)Naming.lookup(regURL);
+			MUDServerInterface server = (MUDServerInterface)Naming.lookup(regURL);
 			System.out.println("Connection is up and running"); // Now we can access methods on the MUDServer through its interface, e.g. server.method()
 
-			startGame(); // Starts the game
+			startGame(server); // Starts the game
 
 			}
 
@@ -52,10 +51,11 @@ public class Client {
 		
 	}
 
-	static void startGame() throws Exception {
-		server.serverList();
-		System.out.println("Choose a MUD server from the list by typing its name.");
-		name = in.readline();
+	static void startGame(MUDServerInterface server) throws Exception {
+		// server.serverList();	// prints a list of the available MUDs to choose from
+		BufferedReader in = new BufferedReader(
+			new InputStreamReader( System.in ));
+			System.out.println( "enter a name for the MUD" );
 	}
 
 }

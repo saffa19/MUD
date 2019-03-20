@@ -19,7 +19,7 @@ class Edge
     public Edge( Vertex d, String v )
     {
         _dest = d;
-	_view = v;
+		_view = v;
     }
 }
 
