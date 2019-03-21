@@ -64,6 +64,10 @@ public class MUDServerImpl implements MUDServerInterface {
 		return _MUD.startLocation();
 	};
 
+	public String takeThing( String loc, String thing) throws RemoteException {
+		return _MUD.takeThing();
+	}
+
 	public void connectUser() throws RemoteException {
 		// connect the user securely to the MUD instance.
 		// probably keep a synchronised record of who's online. --> maybe an onlineUsers() method?

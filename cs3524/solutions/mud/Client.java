@@ -118,8 +118,7 @@ public class Client {
 				case "take" :
 					// return a list of the items in the current location
 					// ask player which item they want
-					// add the item to the player's inventory
-					// delete the item from the current location
+					takeThing( String loc, String thing) // delete the item from the current location and add it to player inventory
 					break;
 
 				default :

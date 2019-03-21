@@ -23,3 +23,4 @@ Can confirm that this won't be finished by 2pm.
 - players can move in any direction
 - players can ask for help
 - players can get info on current location in game
+- CGS D complete
