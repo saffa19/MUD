@@ -44,7 +44,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 	public String serverList() throws RemoteException {
-		String msg = "\n---------------------------------- Available MUDs ----------------------------------\n";
+		String msg = "\n------------------------ Available MUDs ------------------------\n";
 		for (Entry<String,MUD> entry : servers.entrySet()) {
     		String k = entry.getKey();    
     		msg += "MUD: ";
@@ -77,9 +77,9 @@ public class MUDServerImpl implements MUDServerInterface {
 		return _MUD.startLocation();
 	};
 
-	//public boolean takeThing( String loc, String thing) throws RemoteException {
-	//	return _MUD.takeThing();
-	//}
+	public boolean takeThing( String loc, String thing) throws RemoteException {
+		return _MUD.takeThing(loc, thing);
+	}
 
 	// these will be used for the exception handling in a4-a1 and also the restrictions on number of users etc.
 	public void connectUser() throws RemoteException {

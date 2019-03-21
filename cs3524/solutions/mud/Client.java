@@ -78,13 +78,12 @@ public class Client {
 		String spawn = server.startLocation();
 		String myLocation = "";
 		String info = "";
+		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information (what you can see): info\n3. Server list: servers\n4. Main menu: quit\n";
 
 		server.addThing(spawn, username);
 		System.out.println("\n--------------------------------------------------\n-------------- You are now in play! --------------\n");
-		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Server list: servers\n4. Main menu: quit\n";
 		System.out.println(help + "\nYou have started at location " + spawn + "\nMove #1");
-		System.out.println("");
-
+		myLocation = spawn;
 		while (inPlay){
 			String userInput = in.readLine();
 			switch(userInput) {
@@ -106,6 +105,19 @@ public class Client {
 					move += 1;
 					System.out.println("\nMove #" + move);
 					break;
+
+				case "take" :
+					// return a list of the items in the current location
+					// ask player which item they want
+					System.out.println("\nWhat would you like to pick up?");
+					String thing = in.readLine();
+					if (server.takeThing(myLocation, thing) == false){
+						System.out.println("\nYou didn't pick up the " + thing + "! (make sure your spelling is correct)");
+					} else {
+						System.out.println("\nYou picked up the " + thing + "!");
+					} // delete the item from the current location and add it to player inventory
+					System.out.println("What now?");
+					break;
 				
 				case "info" :
 					if (move == 1){
@@ -126,14 +138,8 @@ public class Client {
 					startGame();
 					break;
 
-				case "take" :
-					// return a list of the items in the current location
-					// ask player which item they want
-					//takeThing( String loc, String thing) // delete the item from the current location and add it to player inventory
-					break;
-
 				default :
-					System.out.println("Not a valid command! (type 'help' for a list of commands)");
+					System.out.println("\nNot a valid command! (type 'help' for a list of commands)\n");
 					break;
 			}
 		}

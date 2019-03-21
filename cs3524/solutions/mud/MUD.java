@@ -281,22 +281,19 @@ public class MUD
 	return e._dest._name;
 	}
 
-	/*
+	
 	public boolean takeThing( String loc, String thing){
 		Vertex v = getVertex( loc );
-		List<String> things = v._things;
-		if (things.contains(thing)){
+		System.out.println("v._things: " + v._things);
+		if (v._things.contains(thing)){
 			delThing(loc, thing);
 			//add the thing to the user's inventory - or should I just do that in the client code?
-			String msg = thing;
-			msg += " has been removed from ";
-			msg += loc;
 			return true;
 			} else {
 			return false;
 		}
 	}
-	/*
+	
 	/**
 	 * A main method that can be used to testing purposes to ensure
 	 * that the MUD is specified correctly.

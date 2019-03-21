@@ -51,7 +51,7 @@ class Vertex
 		summary += iter.next() + " ";
 	    } while (iter.hasNext());
 	}
-	summary += "\n\n";
+	summary += "\n";
 	return summary;
     }
 }

@@ -26,10 +26,13 @@ Can confirm that this won't be finished by 2pm.
 - CGS D complete
 
 ## 21 March 2019
-- Did CGS B:
+####Did CGS B:
 - Server list works
 - More than one instance of MUD can be generated
 - Users can view list and decide if they want to create a new MUD or join an existing one
 
 #### 22:23 still no beer :(
 - CGS C done (except for picking things up in the MUD)
+- can pick things up now (i.e. delete them from their location)
+- state of the MUD is preserved if you keep the server up between reboots
+- 
