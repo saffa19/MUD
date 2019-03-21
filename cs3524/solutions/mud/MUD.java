@@ -37,7 +37,7 @@ public class MUD
 	private Map<String,Vertex> vertexMap = new HashMap<String,Vertex>();
 
 	private String _startLocation = "";
-
+	private String _myThings = "My things:\n";
 	/**
 	 * Add a new edge to the graph.
 	 */
@@ -282,11 +282,13 @@ public class MUD
 	}
 
 	
-	public boolean takeThing( String loc, String thing){
+	public boolean takeThing( String loc, String thing, String name){
 		Vertex v = getVertex( loc );
 		System.out.println("v._things: " + v._things);
 		if (v._things.contains(thing)){
+			String message = "The " + thing + " has been taken by " + name + "!";
 			delThing(loc, thing);
+			changeMessage(loc, message);
 			//add the thing to the user's inventory - or should I just do that in the client code?
 			return true;
 			} else {

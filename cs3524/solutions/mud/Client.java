@@ -111,7 +111,7 @@ public class Client {
 					// ask player which item they want
 					System.out.println("\nWhat would you like to pick up?");
 					String thing = in.readLine();
-					if (server.takeThing(myLocation, thing) == false){
+					if (server.takeThing(myLocation, thing, username) == false){
 						System.out.println("\nYou didn't pick up the " + thing + "! (make sure your spelling is correct)");
 					} else {
 						System.out.println("\nYou picked up the " + thing + "!");

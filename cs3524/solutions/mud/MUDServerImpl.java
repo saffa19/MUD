@@ -77,8 +77,8 @@ public class MUDServerImpl implements MUDServerInterface {
 		return _MUD.startLocation();
 	};
 
-	public boolean takeThing( String loc, String thing) throws RemoteException {
-		return _MUD.takeThing(loc, thing);
+	public boolean takeThing( String loc, String thing, String name) throws RemoteException {
+		return _MUD.takeThing(loc, thing, name);
 	}
 
 	// these will be used for the exception handling in a4-a1 and also the restrictions on number of users etc.
