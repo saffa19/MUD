@@ -8,6 +8,7 @@ package cs3524.solutions.mud;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 // Interface provides access to methods in MUDServerImpl.java
 public interface MUDServerInterface extends Remote {
@@ -18,8 +19,8 @@ public interface MUDServerInterface extends Remote {
 	public void addThing( String loc, String thing ) throws RemoteException;				// C3 - C1
 	public String locationInfo(String loc) throws RemoteException; 				            // C3 - C1
 	public String startLocation() throws RemoteException; 									// C3 - C1
-	public String takeThing( String loc, String thing) throws RemoteException;
-	//public void serverList() throws RemoteException; 										// B3 - B1
+	//public boolean takeThing( String loc, String thing) throws RemoteException;
+	public String serverList() throws RemoteException; 										// B3 - B1
 	// Limit no of users logged into MUDs + no of MUDs. New MUDs at runtime.				//   A5
 	public void connectUser() throws RemoteException; 										// A4 - A1
 	public void disconnectUser() throws RemoteException; 									// A4 - A1

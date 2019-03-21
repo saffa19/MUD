@@ -8,6 +8,8 @@ package cs3524.solutions.mud;
 
 import java.util.*;
 import java.rmi.*;
+import java.util.List;
+import java.util.Map.Entry;
 import cs3524.solutions.mud.MUD;
 import cs3524.solutions.mud.MUDServerInterface; // necessary??
 
@@ -16,33 +18,44 @@ import cs3524.solutions.mud.MUDServerInterface; // necessary??
 public class MUDServerImpl implements MUDServerInterface {
 
 	public MUD _MUD;	// an instance variable to reference a MUD
-	//public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
+	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
 
 	public MUDServerImpl() throws RemoteException {
 	
 	}
 
 	public String start() throws RemoteException {
-		return "\nTo create a new MUD server, enter a server name (can't be nothing).";
+		return "To join a MUD from the list, enter its name.\nTo create a new MUD, enter a name that isn't listed (can't be nothing).";
 	}
 
 	public void createMUD(String name) throws RemoteException {
 		try{
-			_MUD = new MUD("mymud.edg","mymud.msg","mymud.thg");
-			System.out.println("Created a MUD called " + name);
+			if (servers.containsKey(name)) { //if entered mud name exists already
+				_MUD = servers.get(name); //_MUD = the value of the corresponding entry in the servers hashmape
+			} else {
+				servers.put(name, new MUD("mymud.edg","mymud.msg","mymud.thg"));
+				System.out.println("Created a MUD called " + name);
+				_MUD = servers.get(name);
+			}
 		}
 		catch (Exception e) {
 			System.err.println( e.getMessage() );
 		}
 	}
 
-	//public void serverList() throws RemoteException {
-	//	System.out.println("-------------------------------\nServers: ");
-	//	System.out.println(servers); // don't know if this will work or if I'll need to print for each entry...
-	//}
+	public String serverList() throws RemoteException {
+		String msg = "---------------------------------- Available MUDs ----------------------------------\n";
+		for (Entry<String,MUD> entry : servers.entrySet()) {
+    		String k = entry.getKey();    
+    		msg += "MUD: ";
+    		msg += k;
+    		msg += "\n";
+		}
+		return msg;
+	}
 
 	public String moveThing(String loc, String dir, String thing) throws RemoteException {
-		System.out.println("Moved " + thing + " from " + loc + ", " + dir + "wards");
+		System.out.println(thing + " moved " + dir + "wards" + " from " + loc);
 		return _MUD.moveThing(loc, dir, thing);
 	}
 
@@ -64,10 +77,11 @@ public class MUDServerImpl implements MUDServerInterface {
 		return _MUD.startLocation();
 	};
 
-	public String takeThing( String loc, String thing) throws RemoteException {
-		return _MUD.takeThing();
-	}
+	//public boolean takeThing( String loc, String thing) throws RemoteException {
+	//	return _MUD.takeThing();
+	//}
 
+	// these will be used for the exception handling in a4-a1 and also the restrictions on number of users etc.
 	public void connectUser() throws RemoteException {
 		// connect the user securely to the MUD instance.
 		// probably keep a synchronised record of who's online. --> maybe an onlineUsers() method?

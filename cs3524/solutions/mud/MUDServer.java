@@ -36,6 +36,8 @@ public class MUDServer {
 			System.out.println("Registering " + regURL + "...");
 			Naming.rebind(regURL, mudstub);
 			System.out.println("MUD server successfully bound to " + regURL);
+
+			mudserver.createMUD("testMUD");
 			// Note the server will not shut down!
 		}
 

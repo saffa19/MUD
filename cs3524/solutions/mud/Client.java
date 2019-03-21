@@ -55,12 +55,19 @@ public class Client {
 	}
 
 	static void startGame() throws Exception {
-		// server.serverList();	// prints a list of the available MUDs to choose from
+		//System.out.println("---------------------------------- Available MUDs ----------------------------------");
+		//int index = 1;
+		//List<String> list = server.serverList();
+		//for (String i : list){
+		//	System.out.println("Server " + index + ": "+ i);
+		//	index ++;
+		//}
+		System.out.println(server.serverList());
 		System.out.println(server.start());
 		String name = in.readLine();
 
 		if (name == null) {
-			System.out.println("Please enter a valid name (can't be null)!");
+			System.out.println("Error: server name can't be null! Enter a valid name.");
 			startGame();
 		} else {
 			server.createMUD(name);
@@ -115,10 +122,14 @@ public class Client {
 					System.out.println(info);
 					break;
 
+				case "servers" :
+					System.out.println(server.serverList());
+					break;
+
 				case "take" :
 					// return a list of the items in the current location
 					// ask player which item they want
-					takeThing( String loc, String thing) // delete the item from the current location and add it to player inventory
+					//takeThing( String loc, String thing) // delete the item from the current location and add it to player inventory
 					break;
 
 				default :
