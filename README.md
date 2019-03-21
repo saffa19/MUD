@@ -24,3 +24,12 @@ Can confirm that this won't be finished by 2pm.
 - players can ask for help
 - players can get info on current location in game
 - CGS D complete
+
+## 21 March 2019
+- Did CGS B:
+- Server list works
+- More than one instance of MUD can be generated
+- Users can view list and decide if they want to create a new MUD or join an existing one
+
+#### 22:23 still no beer :(
+- CGS C done (except for picking things up in the MUD)
