@@ -55,13 +55,7 @@ public class Client {
 	}
 
 	static void startGame() throws Exception {
-		//System.out.println("---------------------------------- Available MUDs ----------------------------------");
-		//int index = 1;
-		//List<String> list = server.serverList();
-		//for (String i : list){
-		//	System.out.println("Server " + index + ": "+ i);
-		//	index ++;
-		//}
+		System.out.println("\n\n\n\n\nMAIN MENU");
 		System.out.println(server.serverList());
 		System.out.println(server.start());
 		String name = in.readLine();
@@ -86,17 +80,17 @@ public class Client {
 		String info = "";
 
 		server.addThing(spawn, username);
-		System.out.println("\n---------------------------------- You are now in play! ----------------------------------");
-		System.out.println("You are at location " + spawn);
-		System.out.println("Move #1");
+		System.out.println("\n--------------------------------------------------\n-------------- You are now in play! --------------\n");
+		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Server list: servers\n4. Main menu: quit\n";
+		System.out.println(help + "\nYou have started at location " + spawn + "\nMove #1");
+		System.out.println("");
 
 		while (inPlay){
 			String userInput = in.readLine();
 			switch(userInput) {
 				case "help" :
-					System.out.println("Commands:");
-					System.out.println("1. Moving: north, south, east, west");
-					System.out.println("2. Location information: info");
+					System.out.println(help);
+					System.out.println("What now?");
 					break;
 
 				case "north" :
@@ -120,10 +114,16 @@ public class Client {
 						info = server.locationInfo(myLocation);
 					}
 					System.out.println(info);
+					System.out.println("What now?");
 					break;
 
 				case "servers" :
 					System.out.println(server.serverList());
+					System.out.println("What now?");
+					break;
+
+				case "quit" :
+					startGame();
 					break;
 
 				case "take" :

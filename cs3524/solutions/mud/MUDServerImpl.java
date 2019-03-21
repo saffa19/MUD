@@ -44,7 +44,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 	public String serverList() throws RemoteException {
-		String msg = "---------------------------------- Available MUDs ----------------------------------\n";
+		String msg = "\n---------------------------------- Available MUDs ----------------------------------\n";
 		for (Entry<String,MUD> entry : servers.entrySet()) {
     		String k = entry.getKey();    
     		msg += "MUD: ";
