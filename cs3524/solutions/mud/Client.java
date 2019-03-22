@@ -17,6 +17,7 @@ public class Client {
 	static MUDServerInterface server;	// a variable in the Client class scope, so that we can reference the same server across methods declared here
 	static BufferedReader in = new BufferedReader(new InputStreamReader( System.in )); // from rmishout: gets input from console.
 
+
 	public static void main(String[] args) throws Exception {
 		if (args.length < 2) {
 			System.err.println("Please enter your <host> and <port>");
@@ -54,34 +55,56 @@ public class Client {
 		
 	}
 
+
 	static void startGame() throws Exception {
-		System.out.println("\n\n\n\n\nMAIN MENU");
+		System.out.println("\n_______________\n...MAIN MENU...\n_______________");
 		System.out.println(server.serverList());
 		System.out.println(server.start());
-		String name = in.readLine();
+		String mudName = in.readLine();
 
-		if (name == null) {
-			System.out.println("Error: server name can't be null! Enter a valid name.");
+		if (mudName == null) {
+			System.out.println("Error: mudName can't be null! Enter a valid mudName.");
 			startGame();
 		} else {
-			server.createMUD(name);
-			playGame(name);
+			if (server.createMUD(mudName) == true){
+				System.out.println("\nYou are playing on MUD: " + mudName);
+				playGame(mudName);
+			} else {
+				System.out.println("Maximum number of MUDs has been reached, please join an existing MUD instead, returning to main menu...");
+				startGame();
+			}
 		}
 	}
 
 
-	static void playGame(String name) throws Exception {
+	static void playGame(String mudName) throws Exception {
 		boolean inPlay = true;
 		int move = 1;
-		System.out.println("\nYou are playing on server: " + name + "\nWho's playing?");
+		System.out.println("Who's playing?");
 		String username = in.readLine();
+		switch(server.storeUsername(username)) {
+			case "taken" :
+				System.out.println("\nThat username is taken!");
+				playGame(mudName);
+				break;
+
+			case "full" :
+				System.out.println("\nMaximum number of unique usernames reached!");
+				playGame(mudName);
+				break;
+
+			case "success" :
+				System.out.println("Welcome on board " + username + "!");
+				break;
+		}
+
 		String spawn = server.startLocation();
 		String myLocation = "";
 		String info = "";
 		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Pick up an item: take\n4. View your inventory: bag\n5. Server list: servers\n6. Main menu: quit\n";
 
 		server.addThing(spawn, username);
-		System.out.println("\n--------------------------------------------------\n-------------- You are now in play! --------------\n");
+		System.out.println("\n\n-------------- Hi " + username + ", you are now in play! --------------\n");
 		System.out.println(help + "\nYou have started at location " + spawn + "\nMove #1");
 		myLocation = spawn;
 		while (inPlay){
@@ -131,6 +154,11 @@ public class Client {
 						info = server.locationInfo(myLocation);
 					}
 					System.out.println(info);
+					System.out.println("What now?");
+					break;
+
+				case "users" :
+					System.out.println(server.usersList());
 					System.out.println("What now?");
 					break;
 
