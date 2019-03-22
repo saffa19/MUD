@@ -118,6 +118,11 @@ public class Client {
 					} // delete the item from the current location and add it to player inventory
 					System.out.println("What now?");
 					break;
+
+				case "bag" :
+					System.out.println(server.inventory(username));
+					System.out.println("What now?");
+					break;
 				
 				case "info" :
 					if (move == 1){

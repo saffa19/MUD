@@ -19,7 +19,8 @@ public class MUDServerImpl implements MUDServerInterface {
 
 	public MUD _MUD;	// an instance variable to reference a MUD
 	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
-
+	public Map<String, String> takenThings = new HashMap<String, String>();
+	
 	public MUDServerImpl() throws RemoteException {
 	
 	}
@@ -31,7 +32,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	public void createMUD(String name) throws RemoteException {
 		try{
 			if (servers.containsKey(name)) { //if entered mud name exists already
-				_MUD = servers.get(name); //_MUD = the value of the corresponding entry in the servers hashmape
+				_MUD = servers.get(name); //_MUD = the value of the corresponding entry in the servers hashmap
 			} else {
 				servers.put(name, new MUD("mymud.edg","mymud.msg","mymud.thg"));
 				System.out.println("Created a MUD called " + name);
@@ -77,8 +78,28 @@ public class MUDServerImpl implements MUDServerInterface {
 		return _MUD.startLocation();
 	};
 
+	public String inventory(String name) throws RemoteException {
+		String s = "\nNo items in you bag yet :(\n";
+		if (takenThings.containsKey(name)){
+			String val = takenThings.get(name);
+			s = "\nYou (" + name + ") have: " + val + "\n";
+		}
+		return s; 
+	}
+
 	public boolean takeThing( String loc, String thing, String name) throws RemoteException {
-		return _MUD.takeThing(loc, thing, name);
+		boolean take = _MUD.takeThing(loc, thing, name);
+
+		if (take){ //if an item gets taken successfully
+			if (takenThings.containsKey(name)){ // if the user has already taken an item
+				String allThings = takenThings.get(name) + ", " + thing;
+				takenThings.put(name, allThings);	// get the item(s) already taken by that user
+				// add the new thing to the list of items
+			} else {
+				takenThings.put(name, thing);
+			}
+		}
+		return take;
 	}
 
 	// these will be used for the exception handling in a4-a1 and also the restrictions on number of users etc.

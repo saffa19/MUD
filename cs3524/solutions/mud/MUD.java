@@ -37,7 +37,7 @@ public class MUD
 	private Map<String,Vertex> vertexMap = new HashMap<String,Vertex>();
 
 	private String _startLocation = "";
-	private String _myThings = "My things:\n";
+
 	/**
 	 * Add a new edge to the graph.
 	 */
