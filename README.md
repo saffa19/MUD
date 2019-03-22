@@ -35,4 +35,8 @@ Can confirm that this won't be finished by 2pm.
 - CGS C done (except for picking things up in the MUD)
 - can pick things up now (i.e. delete them from their location)
 - state of the MUD is preserved if you keep the server up between reboots
-- 
+
+#### 00:22
+- D, C, B completed.
+- weird quirk: users can pick each other up
+- Onto A5: limit number of users/MUDs and create new MUDs at runtime (in-game)
