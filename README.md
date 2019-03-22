@@ -56,5 +56,10 @@ Can confirm that this won't be finished by 2pm.
 - reusing the takenThings hashmap (basically an inventory) to look up things like: total number of users (size of the hashmap's keySet), if a username is taken (hashmap.containsKey())
 - ONTO THE REST OF A
 
-#### 16:
+#### 16:42
+- Login functionality complete.
+- Voluntary disconnect is clean.
+- now to handle involuntary disconnect (aka unplanned abortion)
+
+#### 17:
 - 
