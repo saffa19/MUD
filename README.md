@@ -26,7 +26,8 @@ Can confirm that this won't be finished by 2pm.
 - CGS D complete
 
 ## 21 March 2019
-####Did CGS B:
+
+#### Did CGS B:
 - Server list works
 - More than one instance of MUD can be generated
 - Users can view list and decide if they want to create a new MUD or join an existing one
@@ -46,3 +47,10 @@ Can confirm that this won't be finished by 2pm.
 - quirk: you can pick up yourself (no marks specified for solving this so I'll leave it until last. it doesn't break anything - just messy)
 - fix: add a record of users that starts with the server. takeThing() then checks if the thing a user is picking up isn't a user in the userList.
 - this list will also come in handy with disconnects/reconnects etc.
+
+## 22 March 2019
+
+#### 15:51
+- Maximum allowed number of users/MUDs can be set
+- now I add usernames to the takenThings hashmap as they're created (add username with an empty inventory).
+- reusing the takenThings hashmap (basically an inventory) to look up things like: total number of users (size of the hashmap's keySet), if a username is taken (hashmap.containsKey())
