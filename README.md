@@ -40,3 +40,9 @@ Can confirm that this won't be finished by 2pm.
 - B, C, D completed.
 - weird quirk: users can pick each other up
 - Onto A5: limit number of users/MUDs and create new MUDs at runtime (in-game)
+
+#### 00:56
+- can now create new MUDs at runtime (cleanly)
+- quirk: you can pick up yourself (no marks specified for solving this so I'll leave it until last. it doesn't break anything - just messy)
+- fix: add a record of users that starts with the server. takeThing() then checks if the thing a user is picking up isn't a user in the userList.
+- this list will also come in handy with disconnects/reconnects etc.

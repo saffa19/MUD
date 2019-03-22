@@ -140,6 +140,7 @@ public class Client {
 					break;
 
 				case "quit" :
+					//server.disconnectUser(); // delete user thing from MUD. 
 					startGame();
 					break;
 
