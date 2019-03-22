@@ -37,6 +37,6 @@ Can confirm that this won't be finished by 2pm.
 - state of the MUD is preserved if you keep the server up between reboots
 
 #### 00:22
-- D, C, B completed.
+- B, C, D completed.
 - weird quirk: users can pick each other up
 - Onto A5: limit number of users/MUDs and create new MUDs at runtime (in-game)

@@ -20,6 +20,8 @@ public class MUDServerImpl implements MUDServerInterface {
 	public MUD _MUD;	// an instance variable to reference a MUD
 	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
 	public Map<String, String> takenThings = new HashMap<String, String>();
+	public int maxUsers = 0;
+	public int maxMUDs = 0;
 	
 	public MUDServerImpl() throws RemoteException {
 	
@@ -45,7 +47,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 	public String serverList() throws RemoteException {
-		String msg = "\n------------------------ Available MUDs ------------------------\n";
+		String msg = "\n------------------- Available MUDs -------------------\n";
 		for (Entry<String,MUD> entry : servers.entrySet()) {
     		String k = entry.getKey();    
     		msg += "MUD: ";
@@ -79,7 +81,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	};
 
 	public String inventory(String name) throws RemoteException {
-		String s = "\nNo items in you bag yet :(\n";
+		String s = "\nNo items in your inventory yet.\n";
 		if (takenThings.containsKey(name)){
 			String val = takenThings.get(name);
 			s = "\nYou (" + name + ") have: " + val + "\n";

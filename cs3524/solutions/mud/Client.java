@@ -78,7 +78,7 @@ public class Client {
 		String spawn = server.startLocation();
 		String myLocation = "";
 		String info = "";
-		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information (what you can see): info\n3. Server list: servers\n4. Main menu: quit\n";
+		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Pick up an item: take\n4. View your inventory: bag\n5. Server list: servers\n6. Main menu: quit\n";
 
 		server.addThing(spawn, username);
 		System.out.println("\n--------------------------------------------------\n-------------- You are now in play! --------------\n");
@@ -135,7 +135,7 @@ public class Client {
 					break;
 
 				case "servers" :
-					System.out.println(server.serverList());
+					System.out.println(server.serverList() + "\nTo join a different server, go to the main menu with 'quit'\n");
 					System.out.println("What now?");
 					break;
 
