@@ -20,6 +20,7 @@ public class MUDServerImpl implements MUDServerInterface {
 	public MUD _MUD;	// an instance variable to reference a MUD object
 	public Map<String, MUD> servers = new HashMap<String, MUD>();	// list of available MUDs
 	public Map<String, String> takenThings = new HashMap<String, String>();		// list of users and the things they've picked up
+	public List<String> onlineUsers = new ArrayList<String>(); 
 	public int maxUsers = 3;	// adjust the maximum allowed number of unique users
 	public int maxMUDs = 2;		// adjust the maximum allowed number of unique MUDs
 	
@@ -64,11 +65,7 @@ public class MUDServerImpl implements MUDServerInterface {
 
 	public String usersList() throws RemoteException {
 		String msg = "\n----------------- Online Users -----------------\n";
-		for (Entry<String,String> entry : takenThings.entrySet()) {
-			String k = entry.getKey();
-			msg += k;
-			msg += "\n";
-		}
+		msg += onlineUsers;
 		return msg;
 	}
 
@@ -144,15 +141,24 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 
-	// these will be used for the exception handling in a4-a1 and also the restrictions on number of users etc.
-	public void connectUser() throws RemoteException {
-		// connect the user securely to the MUD instance.
-		// probably keep a synchronised record of who's online. --> maybe an onlineUsers() method?
+	public void connectUser(String username) throws RemoteException {
+		try {
+			onlineUsers.add(username);
+		}
+		catch (Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 
 
-	public void disconnectUser(String loc, String thing) throws RemoteException {
-		_MUD.delThing(loc, thing);
+	public void disconnectUser(String loc, String username) throws RemoteException {
+		try {
+			onlineUsers.remove(username);
+			_MUD.delThing(loc, username);
+		}
+		catch (Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 
 

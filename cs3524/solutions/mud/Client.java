@@ -104,7 +104,7 @@ public class Client {
 				System.out.println("Welcome on board " + username + "!");
 				break;
 		}
-
+		server.connectUser(username);
 		String spawn = server.startLocation();
 		String myLocation = "";
 		String info = "";

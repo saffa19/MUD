@@ -24,6 +24,6 @@ public interface MUDServerInterface extends Remote {
 	public String serverList() throws RemoteException; 										// B3 - B1
 	public String storeUsername(String username) throws RemoteException;
 	public String usersList() throws RemoteException;
-	public void connectUser() throws RemoteException; 										// A4 - A1
+	public void connectUser(String username) throws RemoteException; 						// A4 - A1
 	public void disconnectUser(String loc, String username) throws RemoteException; 		// A4 - A1
 }

@@ -63,3 +63,10 @@ Can confirm that this won't be finished by 2pm.
 - Users can't pick up themselves or other users anymore
 - issue: because I'm using the takenThings hashmap as a list of "online" users, it isn't updated when users leave a MUD, which is bad..
 - fix: when a new user is stored, store their name in a synchronised list (so that their name is removed if their client disconnects)
+
+#### 18:49
+- Done
+- Synchronised list for record of online users
+- disconnect removes user from this list and from the MUD but preserves their inventory
+- connect adds user to the list
+- REPORT TIME
