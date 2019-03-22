@@ -54,3 +54,7 @@ Can confirm that this won't be finished by 2pm.
 - Maximum allowed number of users/MUDs can be set
 - now I add usernames to the takenThings hashmap as they're created (add username with an empty inventory).
 - reusing the takenThings hashmap (basically an inventory) to look up things like: total number of users (size of the hashmap's keySet), if a username is taken (hashmap.containsKey())
+- ONTO THE REST OF A
+
+#### 16:
+- 
