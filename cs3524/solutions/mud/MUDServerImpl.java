@@ -18,8 +18,8 @@ import cs3524.solutions.mud.MUDServerInterface;
 public class MUDServerImpl implements MUDServerInterface {
 
 	public MUD _MUD;	// an instance variable to reference a MUD object
-	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
-	public Map<String, String> takenThings = new HashMap<String, String>();
+	public Map<String, MUD> servers = new HashMap<String, MUD>();	// list of available MUDs
+	public Map<String, String> takenThings = new HashMap<String, String>();		// list of users and the things they've picked up
 	public int maxUsers = 3;	// adjust the maximum allowed number of unique users
 	public int maxMUDs = 2;		// adjust the maximum allowed number of unique MUDs
 	
@@ -34,7 +34,6 @@ public class MUDServerImpl implements MUDServerInterface {
 
 
 	public boolean createMUD(String name) throws RemoteException {
-
 		if (servers.containsKey(name)) { 	// if given mudName exists already
 			_MUD = servers.get(name); 		// _MUD = the value of the corresponding entry in the servers hashmap
 			return true;
@@ -77,11 +76,11 @@ public class MUDServerImpl implements MUDServerInterface {
 	public String storeUsername(String username) throws RemoteException {
 		if (takenThings.keySet().size() < maxUsers){
 			if (takenThings.containsKey(username)) {
-				System.out.println("username already exists");
+				//System.out.println("username already exists");
 				return "alreadyexists";
 			} else {
-				takenThings.put(username, "");
-				System.out.println("username stored");
+				takenThings.put(username, "'s Inventory: ");
+				//System.out.println("username stored");
 				return "success";
 			}
 		} else {
@@ -124,25 +123,24 @@ public class MUDServerImpl implements MUDServerInterface {
 		String s = "\nNo items in your inventory yet.\n";
 		if (takenThings.containsKey(name)){
 			String val = takenThings.get(name);
-			s = "\nYou (" + name + ") have: " + val + "\n";
+			s = "\n" + name + val + "\n";
 		}
 		return s; 
 	}
 
 
 	public boolean takeThing( String loc, String thing, String name) throws RemoteException {
-		boolean take = _MUD.takeThing(loc, thing, name);
-
-		if (take){ //if an item gets taken successfully
-			if (takenThings.containsKey(name)){ // if the user has already taken an item
-				String allThings = takenThings.get(name) + ", " + thing;
+		if (!takenThings.containsKey(thing)){		// if the user isn't trying to pick up another user...
+			boolean take = _MUD.takeThing(loc, thing, name);
+			if (take){ //if an item gets taken successfully
+				String allThings = takenThings.get(name) + thing + " ";
 				takenThings.put(name, allThings);	// get the item(s) already taken by that user
 				// add the new thing to the list of items
-			} else {
-				takenThings.put(name, thing);
 			}
+			return take;
+		} else {
+			return false;
 		}
-		return take;
 	}
 
 
@@ -158,5 +156,5 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 
-	
+
 }

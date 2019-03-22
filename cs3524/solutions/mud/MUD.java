@@ -280,16 +280,19 @@ public class MUD
 	e._dest._things.add( thing );
 	return e._dest._name;
 	}
-
 	
+	/**
+	 * A method to enable a player to pick up a thing from a given
+	 * location in the MUD.
+	 */
 	public boolean takeThing( String loc, String thing, String name){
 		Vertex v = getVertex( loc );
 		System.out.println("v._things: " + v._things);
+
 		if (v._things.contains(thing)){
 			String message = "The " + thing + " has been taken by " + name + "!";
 			delThing(loc, thing);
 			changeMessage(loc, message);
-			//add the thing to the user's inventory - or should I just do that in the client code?
 			return true;
 			} else {
 			return false;

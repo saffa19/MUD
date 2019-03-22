@@ -82,6 +82,7 @@ public class Client {
 		int move = 1;
 		String username = in.readLine();
 
+		// Switch to handle usernames
 		switch(server.storeUsername(username)) {
 			case "alreadyexists" :
 				System.out.println("\nThat username is taken!\nWant to log in with that username? (y/n)");
@@ -107,18 +108,18 @@ public class Client {
 		String spawn = server.startLocation();
 		String myLocation = "";
 		String info = "";
-		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Pick up an item: take\n4. View your inventory: bag\n5. Server list: servers\n6. Main menu: quit\n";
+		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Pick up an item: take\n4. View your inventory: bag\n5. Other online users: users\n6. Server list: servers\n7. Main menu: quit\n";
 
 		server.addThing(spawn, username);
 		System.out.println("\n\n-------------- Hi " + username + ", you are now in play! --------------\n" + help + "\nYou have started at location " + spawn + "\nMove #1");
 		myLocation = spawn;
 
+		// MAIN GAMEPLAY LOOP
 		while (inPlay){
 			String userInput = in.readLine();
 			switch(userInput) {
 				case "help" :
-					System.out.println(help);
-					System.out.println("What now?");
+					System.out.println(help + "\nWhat now?");
 					break;
 
 				case "north" :
@@ -136,21 +137,17 @@ public class Client {
 					break;
 
 				case "take" :
-					// return a list of the items in the current location
-					// ask player which item they want
-					System.out.println("\nWhat would you like to pick up?");
+					System.out.println("\nWhat would you like to take? (you can't pick up players)");
 					String thing = in.readLine();
 					if (server.takeThing(myLocation, thing, username) == false){
-						System.out.println("\nYou didn't pick up the " + thing + "! (make sure your spelling is correct)");
+						System.out.println("\nYou can't pick up " + thing + "!\nWhat now?");
 					} else {
-						System.out.println("\nYou picked up the " + thing + "!");
-					} // delete the item from the current location and add it to player inventory
-					System.out.println("What now?");
+						System.out.println("\nYou picked up the " + thing + "!\nSee it in your inventory with 'bag'\n\nWhat now?");
+					}
 					break;
 
 				case "bag" :
-					System.out.println(server.inventory(username));
-					System.out.println("What now?");
+					System.out.println(server.inventory(username) + "What now?");
 					break;
 				
 				case "info" :
@@ -159,18 +156,15 @@ public class Client {
 					} else {
 						info = server.locationInfo(myLocation);
 					}
-					System.out.println(info);
-					System.out.println("What now?");
+					System.out.println(info + "What now?");
 					break;
 
 				case "users" :
-					System.out.println(server.usersList());
-					System.out.println("What now?");
+					System.out.println(server.usersList() + "\nWhat now?");
 					break;
 
 				case "servers" :
-					System.out.println(server.serverList() + "\nTo join a different server, go to the main menu with 'quit'\n");
-					System.out.println("What now?");
+					System.out.println(server.serverList() + "\nTo join a different server, go to the main menu with 'quit'\n\nWhat now?");
 					break;
 
 				case "quit" :
@@ -179,7 +173,7 @@ public class Client {
 					break;
 
 				default :
-					System.out.println("\nNot a valid command! (type 'help' for a list of commands)\n");
+					System.out.println("\nNot a valid command! (type 'help' for a list of commands)\nWhat now?\n");
 					break;
 			}
 		}

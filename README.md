@@ -3,13 +3,11 @@
 For Dr. Kollingboi
 
 ## 19 March 2019
-Nothing tested yet.
 
-Getting the structure of the thing sorted out before actually seeing if it works.
-
-Skeleton is completely in place 2am 20th March.
-
-Will try to do the whole thing tomorrow before granite city waterpolo match at 2pm.
+#### 02:00 (technically the 20th already)
+- Skeleton is completely in place 
+- Nothing tested yet.
+- Will try to do the whole thing tomorrow before granite city waterpolo match at 2pm.
 
 ## 20 March 2019
 Can confirm that this won't be finished by 2pm.
@@ -59,7 +57,9 @@ Can confirm that this won't be finished by 2pm.
 #### 16:42
 - Login functionality complete.
 - Voluntary disconnect is clean.
-- now to handle involuntary disconnect (aka unplanned abortion)
+- now to handle involuntary disconnect (aka unplanned abortion?)
 
-#### 17:
-- 
+#### 17:50
+- Users can't pick up themselves or other users anymore
+- issue: because I'm using the takenThings hashmap as a list of "online" users, it isn't updated when users leave a MUD, which is bad..
+- fix: when a new user is stored, store their name in a synchronised list (so that their name is removed if their client disconnects)

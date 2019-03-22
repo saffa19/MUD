@@ -21,8 +21,8 @@ public class MUDServer {
 
 		try {
 			String hostname = (InetAddress.getLocalHost()).getCanonicalHostName();
-			int registryport = Integer.parseInt(args[0]); 	// specify which port the rmregistry is listening at for binding and lookup requests
-			int serverport = Integer.parseInt(args[1]); 	// this is the port for our shout service
+			int registryport = Integer.parseInt(args[0]); 	// port for rmregistry to listen for binding and lookup requests
+			int serverport = Integer.parseInt(args[1]); 	// port for the MUD server
 
 			// This is the server's security policy
 			System.setProperty("java.security.policy", "mud.policy");
@@ -37,8 +37,7 @@ public class MUDServer {
 			Naming.rebind(regURL, mudstub);
 			System.out.println("MUD server successfully bound to " + regURL);
 
-			mudserver.createMUD("testMUD");
-			// Note the server will not shut down!
+			mudserver.createMUD("testMUD");		// Created when the client first connects
 		}
 
 		catch (java.net.UnknownHostException e) {
@@ -47,8 +46,8 @@ public class MUDServer {
 		}
 
 		catch (java.io.IOException e) {
-				System.err.println("Failed to register.");
-				System.err.println(e.getMessage());
-			}
+			System.err.println("Failed to register.");
+			System.err.println(e.getMessage());
+		}
 	}
 }
