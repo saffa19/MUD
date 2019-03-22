@@ -67,7 +67,7 @@ public class Client {
 			startGame();
 		} else {
 			if (server.createMUD(mudName) == true){
-				System.out.println("\nYou are playing on MUD: " + mudName);
+				System.out.println("\nYou are playing on MUD: " + mudName + "\nWho's playing?");
 				playGame(mudName);
 			} else {
 				System.out.println("Maximum number of MUDs has been reached, please join an existing MUD instead, returning to main menu...");
@@ -80,12 +80,18 @@ public class Client {
 	static void playGame(String mudName) throws Exception {
 		boolean inPlay = true;
 		int move = 1;
-		System.out.println("Who's playing?");
 		String username = in.readLine();
+
 		switch(server.storeUsername(username)) {
-			case "taken" :
-				System.out.println("\nThat username is taken!");
-				playGame(mudName);
+			case "alreadyexists" :
+				System.out.println("\nThat username is taken!\nWant to log in with that username? (y/n)");
+				String bad2FA = in.readLine();
+				if (bad2FA.equals("y")) {
+					System.out.println("Welcome back " + username + "!");
+				} else {
+					System.out.println("Who's playing?");
+					playGame(mudName);
+				}
 				break;
 
 			case "full" :
@@ -104,9 +110,9 @@ public class Client {
 		String help = "\nCommands:\n1. Moving: north, south, east, west\n2. Location information: info\n3. Pick up an item: take\n4. View your inventory: bag\n5. Server list: servers\n6. Main menu: quit\n";
 
 		server.addThing(spawn, username);
-		System.out.println("\n\n-------------- Hi " + username + ", you are now in play! --------------\n");
-		System.out.println(help + "\nYou have started at location " + spawn + "\nMove #1");
+		System.out.println("\n\n-------------- Hi " + username + ", you are now in play! --------------\n" + help + "\nYou have started at location " + spawn + "\nMove #1");
 		myLocation = spawn;
+
 		while (inPlay){
 			String userInput = in.readLine();
 			switch(userInput) {
@@ -168,7 +174,7 @@ public class Client {
 					break;
 
 				case "quit" :
-					//server.disconnectUser(); // delete user thing from MUD. 
+					server.disconnectUser(myLocation, username); // delete user thing from MUD. 
 					startGame();
 					break;
 

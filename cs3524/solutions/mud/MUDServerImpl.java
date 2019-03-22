@@ -17,7 +17,7 @@ import cs3524.solutions.mud.MUDServerInterface;
 // All the methods that appear in MUDServerInterface need to be implemented in this class.
 public class MUDServerImpl implements MUDServerInterface {
 
-	public MUD _MUD;	// an instance variable to reference a MUD
+	public MUD _MUD;	// an instance variable to reference a MUD object
 	public Map<String, MUD> servers = new HashMap<String, MUD>();	// Map<name, instance> a list of the available MUDs, thinking ahead
 	public Map<String, String> takenThings = new HashMap<String, String>();
 	public int maxUsers = 3;	// adjust the maximum allowed number of unique users
@@ -35,8 +35,8 @@ public class MUDServerImpl implements MUDServerInterface {
 
 	public boolean createMUD(String name) throws RemoteException {
 
-		if (servers.containsKey(name)) { //if entered mud name exists already
-			_MUD = servers.get(name); //_MUD = the value of the corresponding entry in the servers hashmap
+		if (servers.containsKey(name)) { 	// if given mudName exists already
+			_MUD = servers.get(name); 		// _MUD = the value of the corresponding entry in the servers hashmap
 			return true;
 		} else {
 			if (servers.keySet().size() < maxMUDs){
@@ -78,7 +78,7 @@ public class MUDServerImpl implements MUDServerInterface {
 		if (takenThings.keySet().size() < maxUsers){
 			if (takenThings.containsKey(username)) {
 				System.out.println("username already exists");
-				return "taken";
+				return "alreadyexists";
 			} else {
 				takenThings.put(username, "");
 				System.out.println("username stored");
@@ -104,16 +104,18 @@ public class MUDServerImpl implements MUDServerInterface {
 
 	public void addThing(String loc, String thing) throws RemoteException {
 		_MUD.addThing(loc, thing);
-		System.out.println("Added " + thing + " to " + loc);
+		System.out.println("Added " + thing + " to location " + loc);
 	};
 
 
 	public String locationInfo(String loc) throws RemoteException {
+		System.out.println("User requested info about location: " + loc);
 		return _MUD.locationInfo(loc);
 	};
 
 
 	public String startLocation() throws RemoteException {
+		System.out.println("Set the start location");
 		return _MUD.startLocation();
 	};
 
@@ -151,7 +153,10 @@ public class MUDServerImpl implements MUDServerInterface {
 	}
 
 
-	public void disconnectUser() throws RemoteException {
-		// disconnect the user securely to the MUD instance.
+	public void disconnectUser(String loc, String thing) throws RemoteException {
+		_MUD.delThing(loc, thing);
 	}
+
+
+	
 }
